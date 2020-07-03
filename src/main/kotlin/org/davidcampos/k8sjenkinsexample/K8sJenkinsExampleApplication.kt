@@ -7,5 +7,6 @@ import org.springframework.boot.runApplication
 class K8sJenkinsExampleApplication
 
 fun main(args: Array<String>) {
+	if (true) throw Exception("EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEException")
 	runApplication<K8sJenkinsExampleApplication>(*args)
 }
