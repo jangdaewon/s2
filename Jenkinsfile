@@ -4,8 +4,8 @@ pipeline {
         NAME = "${env.BRANCH_NAME == "master" ? "example" : "example-staging"}"
         VERSION = readMavenPom().getVersion()
         DOMAIN = 'localhost'
-        REGISTRY = 'davidcampos/k8s-jenkins-example'
-        REGISTRY_CREDENTIAL = 'dockerhub-davidcampos'
+        REGISTRY = 'jangdaewon/k8s-jenkins-example'
+        REGISTRY_CREDENTIAL = 'dockerhub_id'
     }
     agent {
         kubernetes {
@@ -49,6 +49,10 @@ pipeline {
             }
             steps {
                 container('helm') {
+                    sh "helm env"
+                    echo "################################"
+                    sh "helm version"
+                    sh "helm list"
                     sh "helm upgrade --install --force --set name=${NAME} --set image.tag=${VERSION} --set domain=${DOMAIN} ${NAME} ./helm"
                 }
             }
